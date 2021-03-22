@@ -1,22 +1,24 @@
 const { response } = require('@utils');
 
-exports.pickUpAddressValidator = async(req, res, next)=>{
+exports.registerAddress = async(req, res, next)=>{
   try{
-    const { vendor, email, phone, title, addressLineOne,
+    const { email, phone, title, addressLineOne,
       addressLineTwo, city, pinCode, state, country  } = req.body;
-
-    if(!vendor) throw { code: 409, message: 'Invalid vendor' };
 
     if(!email) throw { code: 409, message: 'Invalid email' };
 
     if(!phone) throw { code: 409, message: 'Invalid phone' };
+
+    const validPhone = global.phoneUtil.parseAndKeepRawInput(phone, process.env.COUNTRY_CODE);
+
+    if(!validPhone) throw { code: 409, message: 'Invalid phone!' };
 
     if(!title) throw { code: 409, message: 'Invalid title' };
 
     if(!addressLineOne) throw { code: 409, message: 'Invalid address line one' };
 
     if(addressLineOne.length < 10) throw { code: 409, message:
-        'Invalid address line  must be at least of 10 character long ' };
+        'Invalid address line  must be at least of 10 character long' };
 
     if(!addressLineTwo) throw { code: 409, message: 'Invalid address line two' };
 
@@ -33,6 +35,6 @@ exports.pickUpAddressValidator = async(req, res, next)=>{
     next()
   }
   catch (e){
-    response.error(e)
+    response.error(res, e)
   }
 };

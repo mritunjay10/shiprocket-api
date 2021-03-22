@@ -1,15 +1,18 @@
 const { response } = require('@utils');
-
-const { ShipRocket } = require('@helper');
+const { Redis } = require('@redis');
+const { ShipRocket  } = require('@helper');
 
 exports.registerAddress = async (req, res)=>{
 
   try{
-    const { vendor, email, phone, title, addressLineOne,
+    const { email, phone, title, addressLineOne,
       addressLineTwo, city, pinCode, state, country  } = req.body;
 
-    const { status, data, message } = await ShipRocket.createPickUpLocation({
-      vendor,
+    const token = await Redis.get(process.env.REDIS_SHIPROCKET_KEY);
+
+    const shipRocket = new ShipRocket(token);
+
+    const body = {
       name: title,
       email,
       phone,
@@ -19,11 +22,13 @@ exports.registerAddress = async (req, res)=>{
       state,
       country,
       pin_code: pinCode,
-    });
+    };
+
+    const { status, data, message } = await shipRocket.createPickUpLocation(body);
 
     if(!status) throw { message };
 
-    response.success(res, { code: 201, message, data } )
+    response.success(res, { code: 200, message, data, pagination: null });
   }
   catch (e){
     response.error(res, e)

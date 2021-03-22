@@ -1,10 +1,9 @@
 const axios = require('axios');
-
-const { Redis } = require('@redis');
+const RandExp = require('randexp');
 
 class ShipRocket {
 
-  constructor(){
+  constructor(token){
 
     this.axiosAuthInstance =  axios.create({
       baseURL: process.env.SHIPROCKET_URL,
@@ -12,7 +11,9 @@ class ShipRocket {
 
     this.axiosInstance =  axios.create({
       baseURL: process.env.SHIPROCKET_URL,
-      headers: {'Authorization Bearer': Redis.get(process.env.REDIS_SHIPROCKET_KEY)},
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
     });
   }
 
@@ -40,11 +41,11 @@ class ShipRocket {
 
     try{
 
-      const { vendor, name, email, phone, address,
+      const { name, email, phone, address,
         address_2, city, state, country, pin_code } = request;
 
-      const result = await this.axiosInstance.post('settings/company/pickup', {
-        pickup_location: vendor,
+      const result = await this.axiosInstance.post('settings/company/addpickup', {
+        pickup_location: new RandExp(/([0-9][a-z]\w{0,8})/).gen(),
         name,
         email,
         phone,
@@ -54,18 +55,23 @@ class ShipRocket {
         state,
         country,
         pin_code,
-
       });
 
-      const { success, address: data } = result
+      const { success, address: addressData  } = result.data;
 
       if(!success) throw { message: 'Unable to register address' };
 
-      return { status: success, data, message: 'Address registered successfully!' }
+      return { status: success, data: addressData, message: 'Address registered successfully!' }
     }
-    catch(e){
+    catch(error){
 
-      return { status: false, data:null,  message: e.message }
+      const {response} = error;
+
+      const {data: {message} } = response;
+
+      console.log(JSON.stringify(response.data))
+
+      return { status: false, data:null,  message: message|| 'Unable to register address' }
     }
   }
 }

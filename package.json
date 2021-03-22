@@ -15,6 +15,7 @@
     "express": "~4.16.1",
     "express-group-routes": "^1.1.0",
     "express-sanitizer": "^1.0.5",
+    "google-libphonenumber": "^3.2.18",
     "helmet": "^3.23.3",
     "ioredis": "^4.17.3",
     "is-json": "^2.0.1",
@@ -23,6 +24,7 @@
     "morgan": "~1.9.1",
     "node-cron": "^3.0.0",
     "path": "^0.12.7",
+    "randexp": "^0.5.3",
     "uuid": "^8.3.1"
   },
   "devDependencies": {

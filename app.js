@@ -9,16 +9,14 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const PNF = require('google-libphonenumber').PhoneNumberFormat;
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
+
 const { packageRouter, pickUpAddress } = require('@routes');
 
-const profile = {
-  Api_type: process.env.Api_type,
-  LicenceKey: process.env.LicenceKey,
-  LoginID: process.env.LoginID,
-  Version: process.env.Version,
-};
-
-global.profile = global.profile || profile;
+global.PNF = global.PNF || PNF;
+global.phoneUtil = global.phoneUtil || phoneUtil;
+global.basePath = global.basePath || __dirname;
 
 const app = express();
 

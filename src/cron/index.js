@@ -7,7 +7,7 @@ cron.schedule('00 1 * * *', async ()=>{
 
   try{
 
-    const { status, data, message } = await new ShipRocket().login();
+    const { status, data, message } = await new ShipRocket(null).login();
 
     if(!status) throw { message };
 
