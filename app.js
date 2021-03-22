@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('module-alias/register')
+require('module-alias/register');
 const express = require('express');
 const cors = require('cors');
 const expressSanitizer = require('express-sanitizer');
@@ -9,7 +9,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const { packageRouter } = require('@routes');
+const { packageRouter, pickUpAddress } = require('@routes');
 
 const profile = {
   Api_type: process.env.Api_type,
@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 app.use(expressSanitizer());
 
 app.use('/api/v1/package', packageRouter);
+app.use('/api/v1/pick-up-address', pickUpAddress);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=> {
@@ -45,5 +46,8 @@ app.use((err, req, res, next)=> {
 
   res.status(500).json({ success: false, message: res.locals.error, data: null, pagination: null  })
 });
+
+
+require('@cron');
 
 module.exports = app;

@@ -1,6 +1,5 @@
 const { response } = require('@utils');
 
-
 exports.requestPickUp = async (req, res)=>{
 
   try{
