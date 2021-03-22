@@ -1,0 +1,63 @@
+{
+  "name": "bludart-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@sentry/node": "^5.27.0",
+    "amqplib": "^0.5.6",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-group-routes": "^1.1.0",
+    "express-sanitizer": "^1.0.5",
+    "helmet": "^3.23.3",
+    "ioredis": "^4.17.3",
+    "is-json": "^2.0.1",
+    "jose": "^1.27.2",
+    "moment": "^2.29.1",
+    "morgan": "~1.9.1",
+    "path": "^0.12.7",
+    "strong-soap": "^3.0.0",
+    "uuid": "^8.3.1",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "module-alias": "^2.2.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "indent": [
+        2,
+        2
+      ],
+      "quotes": [
+        2,
+        "single"
+      ],
+      "comma-dangle": [
+        2,
+        "always-multiline"
+      ]
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017
+    }
+  },
+  "_moduleAliases": {
+    "@api": "src/api",
+    "@routes": "src/routes",
+    "@utils": "src/utils"
+  }
+}
