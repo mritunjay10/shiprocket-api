@@ -45,7 +45,7 @@ class ShipRocket {
         address_2, city, state, country, pin_code } = request;
 
       const result = await this.axiosInstance.post('settings/company/addpickup', {
-        pickup_location: new RandExp(/([0-9][a-z]\w{0,8})/).gen(),
+        pickup_location: new RandExp(/([0-9][a-z]\w{8})/).gen(),
         name,
         email,
         phone,
