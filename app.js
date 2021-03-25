@@ -12,6 +12,7 @@ const path = require('path');
 const PNF = require('google-libphonenumber').PhoneNumberFormat;
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
+const { shipRocket } = require('@middleware');
 const { packageRouter, pickUpAddress } = require('@routes');
 
 global.PNF = global.PNF || PNF;
@@ -28,8 +29,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(expressSanitizer());
 
-app.use('/api/v1/package', packageRouter);
-app.use('/api/v1/pick-up-address', pickUpAddress);
+
+app.use('/api/v1/pick-up-address', shipRocket.token, pickUpAddress);
+app.use('/api/v1/package', shipRocket.token, packageRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=> {

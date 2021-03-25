@@ -1,5 +1,4 @@
 const { response } = require('@utils');
-const { Redis } = require('@redis');
 const { ShipRocket  } = require('@helper');
 
 exports.registerAddress = async (req, res)=>{
@@ -8,9 +7,7 @@ exports.registerAddress = async (req, res)=>{
     const { email, phone, title, addressLineOne,
       addressLineTwo, city, pinCode, state, country  } = req.body;
 
-    const token = await Redis.get(process.env.REDIS_SHIPROCKET_KEY);
-
-    const shipRocket = new ShipRocket(token);
+    const shipRocket = new ShipRocket(req.shipRocket);
 
     const body = {
       name: title,

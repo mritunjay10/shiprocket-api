@@ -62,6 +62,7 @@
     "@helper": "src/helper",
     "@redis": "redis",
     "@routes": "src/routes",
-    "@utils": "src/utils"
+    "@utils": "src/utils",
+    "@middleware": "src/middleware"
   }
 }
