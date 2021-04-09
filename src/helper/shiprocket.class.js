@@ -328,7 +328,7 @@ class ShipRocket {
 
       const { data: {message} } = response;
 
-      return message || 'Unable to request for pick-up location.'
+      return message || 'Error while operating!'
     }
     catch(e) {
 
