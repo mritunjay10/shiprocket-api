@@ -188,7 +188,7 @@ class ShipRocket {
 
       if(not_created.length>0) throw { message: 'Error while generating invoices!' };
 
-      return { status: true, data: invoice_url, message: 'Label generated successfully!' }
+      return { status: true, data: invoice_url, message: 'Invoice generated successfully!' }
     }
     catch (error){
       const message = this.parseError(error);
