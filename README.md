@@ -3,9 +3,9 @@
 An Implementation of Shiprocket-API in node.js. Technologies used are Node.js and Express.js, this project is developed to be treated as a micro-service.
 
 ## Tools used
-####node.js >= 12.22.6
-####npm >= 6.14.15
-####Redis >= 6.0.6
+#### node.js >= 12.22.6
+#### npm >= 6.14.15
+#### Redis >= 6.0.6
 
 ## Copy .example-env to .env
 ```bash
