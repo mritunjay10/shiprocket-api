@@ -36,4 +36,4 @@ npm run start
 ```
 
 ### Support
-Start the repository if it had helped you in any way.
+**Star** the repository if it had helped you in any way.
