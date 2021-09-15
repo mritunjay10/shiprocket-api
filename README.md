@@ -34,3 +34,6 @@ npm install
 ```bash
 npm run start
 ```
+
+### Support
+Start the repository if it had helped you in any way.
